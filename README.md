@@ -42,3 +42,17 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
 - `\w+` and `\S+`: Skips past the protocol column (TCP/UDP) and the Source/Destination IP address columns by matching word and non-whitespace characters.
 - `\d+`: Matches the Source Port numbers.
 - `(\d+)` (Capturing Group): The core component of this project. The parentheses define a capturing group. It tells the Python script to specifically extract this final group of digits, which represents the targeted Destination Port.
+
+Below is a live snapshot demonstrating the Python parser successfully processing the raw `nmap_firewall_dump_log.txt` file and extracting network artifacts using the Regex patterns defined above:
+
+![Sample Output](output_nmap.png)
+
+### 🔍 Key Findings from the Parse Result:
+- **Attacker Profiling**: The Regex patterns effectively isolated multiple external source IP addresses involved in network probing activities, organizing them automatically into a clean list format.
+- **Target Analysis**: A total of **11 distinct ports** were detected as actively targeted. Key security-sensitive ports discovered in the scan trace include:
+  - `53` (DNS)
+  - `135` (MSRPC Execution)
+  - `139` (NetBIOS Session Service)
+  - `445` (Microsoft-DS / SMB)
+  - `443` (HTTPS Security)
+- **Execution Metric**: The parsing logic successfully concluded by identifying all unique indicators and logging the exact count of probed ports at the terminal interface.
