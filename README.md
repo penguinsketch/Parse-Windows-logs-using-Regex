@@ -14,6 +14,7 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
 ## 📂 Repository Structure
 - `Nmap_parser.py`: The main Python script containing the Regex search logic.
 - `Nmap_parserV2.py`: The enhanced version with total connection traffic counting.
+- `Nmap_parserV3.py`: The updated main Python automation script containing the field-parsing logic.
 - `nmap_firewall_dump_log.txt`: A sample raw text log file exported from Windows Firewall during an active Nmap scan.
 
 ## 🚀 How to Run the Project
@@ -96,4 +97,28 @@ The V2 script optimizes the pattern matching logic to strictly focus on specific
    ```
    - Skips past the action, protocol, source IP, destination IP, and source port fields to pinpoint the exact destination port.
    - `(\d+)`: Captures only the targeted service ports under attack, ignoring successful connections (`ALLOW`) to maintain a clean threat profile.
+   
+# Windows Firewall Log Parser for Nmap Reconnaissance Detection (V3)
+
+A Python-based security tool designed for **SOC Tier 1 Analysts** to automatically parse, filter, and extract critical Indicators of Compromise (IoCs) from raw Microsoft Windows Firewall logs during an active internal network scan.
+
+## 🚀 Key Features (V3 Updates)
+- **Top-Level Timing Metrics**: Extracts the exact start and end timestamps of malicious scanning activities.
+- **Unified Traffic Counter**: Tracks absolute connection volumes (`total scans`) across all firewall operations (DROP, ALLOW, DENY).
+- **Target Profile Matrix**: Isolates malicious threat sources from internal victim destinations cleanly.
+- **Defensive Auditing**: Extracts and tabulates all structural network service ports that are currently allowed (`ALLOW`) on the host system.
+
+## 🖥️ Sample Execution & Output
+
+Below is a live snapshot demonstrating the updated Python parser successfully processing a raw firewall log file and formatting the network artifacts:
+
+![Sample Output V3](output_nmap(Final).png)
+
+## 🔍 SOC Tier 1 Incident Triage & Analysis
+
+This script delivers actionable metrics required for immediate ticket creation and classification in a Security Operations Center:
+
+1. **Automation Verification**: The delta between the **First** and **Last Scan Timestamps** is exactly **1 second**. This compressed window proves high-speed automation tools (like an Nmap scan) are at play rather than human-speed manual probing.
+2. **Threat Containment (Source IP)**: The IP address `10.0.2.8` is flagged as an active threat source attempting lateral movement. This endpoint should be isolated via the EDR or network switch immediately.
+3. **Attack Surface Risk (Allow Ports)**: While the firewall successfully dropped multiple unauthorized connections, the output highlights critical system vectors—specifically **Port 445 (SMB)** and **Port 137 (NetBIOS)**—as actively allowed (`ALLOW`) on the host system. If the attacker targets these exposed services next, the risk of a successful breach or ransomware spread escalates significantly.
 
