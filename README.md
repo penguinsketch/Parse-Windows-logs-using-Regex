@@ -13,6 +13,7 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
 
 ## 📂 Repository Structure
 - `Nmap_parser.py`: The main Python script containing the Regex search logic.
+- `Nmap_parser_v2.py`: The enhanced version with fully English output and total connection traffic counting.
 - `nmap_firewall_dump_log.txt`: A sample raw text log file exported from Windows Firewall during an active Nmap scan.
 
 ## 🚀 How to Run the Project
@@ -63,3 +64,18 @@ Below is a live snapshot demonstrating the Python parser successfully processing
   - `445` (Microsoft-DS / SMB)
   - `443` (HTTPS Security)
 - **Execution Metric**: The parsing logic successfully concluded by identifying all unique indicators and logging the exact count of probed ports at the terminal interface.
+
+Below is a live snapshot demonstrating the updated Python parser (V2) successfully processing the raw `nmap_firewall_dump_log.txt` file, providing a complete traffic overview, and logging all metrics in full English format:
+
+![Sample Output V2](output_nmap_v2.png)
+
+### 🔍 Key Findings from the Parse Result (V2):
+- **Traffic Overview**: The updated logic introduces comprehensive traffic tracking, calculating a total of **39 network log entries** across all firewall actions (DROP, ALLOW, and others) to provide better visibility into overall network volume.
+- **Incident Attribution**: 
+  - **Source IP (Attacker)**: Successfully isolated `10.0.2.8` as the sole source of the aggressive scanning activity.
+  - **Destination IP (Impact)**: Confirmed that `10.0.2.5` was the primary target system receiving the scanning traffic.
+- **Action-Based Segmentation**:
+  - **Blocked Scans (DROP)**: Identified **7 distinct probing attempts** targeting critical Windows services (Ports 135, 139, 445) within a 1-second window.
+  - **Allowed Services (ALLOW)**: Detected **6 active open ports** (`53`, `67`, `138`, `443`, `1900`, `5353`, `5355`) facilitating legitimate outbound and discovery traffic.
+- **Execution Metric**: The parser successfully completed execution, verifying that all unique attacker profiles, impact zones, and port signatures were accurately categorized and sorted.
+
