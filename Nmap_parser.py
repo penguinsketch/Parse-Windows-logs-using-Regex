@@ -9,10 +9,10 @@ def extract_nmap_iocs(log_file_path):
         return
 
     # Regex set for extracting raw messages from Windows Firewall Logs
-    # 🔍 1. Regex for extracting the IPv4 Address of the Kali machine
+    # 1. Regex for extracting the IPv4 Address of the Kali machine
     ip_pattern = r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"
     
-    # 🔍 2. Regex for capturing destination ports in raw logs
+    # 2. Regex for capturing destination ports in raw logs
     # Capturing ports located after the ALLOW or DROP state of the firewall.
     port_pattern = r"(?:ALLOW|DROP)\s+\w+\s+\S+\s+\S+\s+\d+\s+(\d+)"
 
@@ -33,7 +33,7 @@ def extract_nmap_iocs(log_file_path):
         unique_ips = set(all_ips)
         unique_ports = set(all_ports)
 
-        # 🚨 The results are summarized as IOCs.
+        # The results are summarized as IOCs.
         print("\n[🚨] Indicators of Compromise (IOCs) Detected:")
         print("-" * 60)
         
