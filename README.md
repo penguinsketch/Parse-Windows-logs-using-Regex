@@ -13,7 +13,7 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
 
 ## 📂 Repository Structure
 - `Nmap_parser.py`: The main Python script containing the Regex search logic.
-- `Nmap_parser_v2.py`: The enhanced version with fully English output and total connection traffic counting.
+- `Nmap_parser_v2.py`: The enhanced version with total connection traffic counting.
 - `nmap_firewall_dump_log.txt`: A sample raw text log file exported from Windows Firewall during an active Nmap scan.
 
 ## 🚀 How to Run the Project
