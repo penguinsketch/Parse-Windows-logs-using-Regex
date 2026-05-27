@@ -14,7 +14,7 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
 3. Place your raw log file in the same directory as the script.
 4. Run the script via Command Prompt / Terminal:
    ```bash
-   python Nmap_parser.py
+   python -u "c:\YOUR_FILE_PATH\Nmap_parser.py"
    ```
 
 ---
