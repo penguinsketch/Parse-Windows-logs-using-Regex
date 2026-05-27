@@ -13,7 +13,7 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
 
 ## 📂 Repository Structure
 - `Nmap_parser.py`: The main Python script containing the Regex search logic.
-- `Nmap_parser_v2.py`: The enhanced version with total connection traffic counting.
+- `Nmap_parserV2.py`: The enhanced version with total connection traffic counting.
 - `nmap_firewall_dump_log.txt`: A sample raw text log file exported from Windows Firewall during an active Nmap scan.
 
 ## 🚀 How to Run the Project
@@ -78,4 +78,22 @@ Below is a live snapshot demonstrating the updated Python parser (V2) successful
   - **Blocked Scans (DROP)**: Identified **7 distinct probing attempts** targeting critical Windows services (Ports 135, 139, 445) within a 1-second window.
   - **Allowed Services (ALLOW)**: Detected **6 active open ports** (`53`, `67`, `138`, `443`, `1900`, `5353`, `5355`) facilitating legitimate outbound and discovery traffic.
 - **Execution Metric**: The parser successfully completed execution, verifying that all unique attacker profiles, impact zones, and port signatures were accurately categorized and sorted.
+
+### 🧩 Regex Patterns Explanation (V2)
+
+The V2 script optimizes the pattern matching logic to strictly focus on specific security events and capture structural relationships between network entities:
+
+1. **Attacker & Target Pair Extraction**
+   ```regex
+   DROP\s+\w+\s+([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})\s+([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})
+   ```
+   - `DROP\s+\w+`: Explicitly isolates entries where the firewall dropped traffic, followed by the protocol name (e.g., TCP/UDP). This filters out normal activity.
+   - `([0-9]{1,3}\...)\s+([0-9]{1,3}\...)`: Uses two distinct capture groups to grab the **Source IP** and **Destination IP** simultaneously in a single line match. This guarantees exact mapping of who is attacking whom.
+
+2. **Target Port Extraction**
+   ```regex
+   DROP\s+\w+\s+\S+\s+\S+\s+\d+\s+(\d+)
+   ```
+   - Skips past the action, protocol, source IP, destination IP, and source port fields to pinpoint the exact destination port.
+   - `(\d+)`: Captures only the targeted service ports under attack, ignoring successful connections (`ALLOW`) to maintain a clean threat profile.
 
