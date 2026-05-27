@@ -17,6 +17,7 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
    ```
 
 ---
+# Windows Firewall Log Parser for Nmap Reconnaissance Detection (V1)
 
 ## 🔬 Regex Patterns Explanation
 
@@ -55,6 +56,8 @@ Below is a live snapshot demonstrating the Python parser successfully processing
   - `445` (Microsoft-DS / SMB)
   - `443` (HTTPS Security)
 - **Execution Metric**: The parsing logic successfully concluded by identifying all unique indicators and logging the exact count of probed ports at the terminal interface.
+
+# Windows Firewall Log Parser for Nmap Reconnaissance Detection (V2)
 
 Below is a live snapshot demonstrating the updated Python parser (V2) successfully processing the raw `nmap_firewall_dump_log.txt` file, providing a complete traffic overview, and logging all metrics in full English format:
 
