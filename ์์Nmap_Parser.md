@@ -15,7 +15,6 @@ A lightweight security tool designed to parse raw text files from Windows Firewa
    ```bash
    python -u "c:\YOUR_FILE_PATH\Nmap_parser.py"
    ```
-
 ---
 # Windows Firewall Log Parser for Nmap Reconnaissance Detection (V1)
 
