@@ -67,7 +67,7 @@ Below is a live snapshot demonstrating the Python parser successfully processing
 
 Below is a live snapshot demonstrating the updated Python parser (V2) successfully processing the raw `nmap_firewall_dump_log.txt` file, providing a complete traffic overview, and logging all metrics in full English format:
 
-![Sample Output V2](output_nmap_v2.png)
+![Sample Output V2](output_nmapV2.png)
 
 ### 🔍 Key Findings from the Parse Result (V2):
 - **Traffic Overview**: The updated logic introduces comprehensive traffic tracking, calculating a total of **39 network log entries** across all firewall actions (DROP, ALLOW, and others) to provide better visibility into overall network volume.
